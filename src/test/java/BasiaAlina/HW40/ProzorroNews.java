@@ -27,6 +27,5 @@ public class ProzorroNews {
             System.out.println("Page 5 is active: " + page5Active.isDisplayed());
             driver.quit();
         }
-
     }
 
