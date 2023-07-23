@@ -25,6 +25,7 @@ public class ProzorroNews {
             action.sendKeys(Keys.END).build().perform();
             WebElement page5Active = driver.findElement(By.xpath("//*[@class='paginate__btn active' and contains(text(),'5')]"));
             System.out.println("Page 5 is active: " + page5Active.isDisplayed());
+            driver.quit();
         }
     }
 
