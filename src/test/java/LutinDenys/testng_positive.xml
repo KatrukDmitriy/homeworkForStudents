@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Positive Tests Suite" parallel="methods">
+    <test name="Positive Tests">
+        <classes>
+            <class name="LutinDenys.xmlHW41.TestSearchDOU">
+                <methods>
+                    <include name="positiveSearch1" />
+                    <include name="positiveSearch2" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

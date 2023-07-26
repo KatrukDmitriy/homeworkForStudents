@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Negative Tests Suite" parallel="methods" thread-count="4">
+    <test name="Negative Tests">
+        <classes>
+            <class name="LutinDenys.xmlHW41.TestSearchDOU">
+                <methods>
+                    <include name="negativeSearch1" />
+                    <include name="negativeSearch2" />
+                    <include name="negativeSearch3" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
