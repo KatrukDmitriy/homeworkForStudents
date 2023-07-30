@@ -1,0 +1,12 @@
+<suite name="Negative Tests Suite">
+    <test name="Negative Tests">
+        <groups>
+            <run>
+                <include name="Negative_Test" />
+            </run>
+        </groups>
+        <classes>
+            <class name="dou.DouTest" />
+        </classes>
+    </test>
+</suite>
