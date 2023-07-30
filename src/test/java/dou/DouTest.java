@@ -36,6 +36,20 @@ public class DouTest {
         };
     }
 
+    @Test (groups="Positive_Test")
+    public  void searchInputAvailabilityWithNewDriver() {
+        System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        WebDriver newDriver = new ChromeDriver(options);
+        newDriver.get("https://dou.ua/");
+
+        WebElement input = newDriver.findElement(By.cssSelector("#txtGlobalSearch"));
+
+        assertTrue(input.isEnabled(), "Input is disabled");
+
+    }
+
 
 
     @Test (groups="Positive_Test")
