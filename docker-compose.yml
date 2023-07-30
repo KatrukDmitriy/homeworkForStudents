@@ -4,31 +4,50 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
-#    volumes:
-#      - jenkins_home:/var/jenkins_home
-#      - /var/run/docker.sock:/var/run/docker.sock
-#    user: root
-#    networks:
-#      - cicd_network
-#
-#  nexus:
-#    image: sonatype/nexus3
-#    ports:
-#      - "8081:8081"
-#      - "8083:8083"
-#    volumes:
-#      - nexus_data:/nexus-data
-#    networks:
-#      - cicd_network
-#
-#volumes:
-#  jenkins_home:
-#    external: true
-#    name: jenkins_home
-#  nexus_data:
-#    external: true
-#    name: nexus_data
-#
-#networks:
-#  cicd_network:
-#    driver: bridge
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    user: root
+    networks:
+      - cicd_network
+
+  nexus:
+    image: sonatype/nexus3
+    ports:
+      - "8081:8081"
+      - "8083:8083"
+    volumes:
+      - nexus_data:/nexus-data
+    networks:
+      - cicd_network
+
+  chrome:
+    image: selenium/node-chrome:4.10.0-20230607
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "6900:5900"
+
+  selenium-hub:
+    image: selenium/hub:4.10.0-20230607
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+volumes:
+  jenkins_home:
+    external: true
+    name: jenkins_home
+  nexus_data:
+    external: true
+    name: nexus_data
+
+networks:
+  cicd_network:
+    driver: bridge

@@ -1,10 +1,10 @@
 package dou;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.http.ClientConfig;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -22,11 +22,15 @@ public class DouTest {
 
     @BeforeMethod
     public void setUp() {
+        ClientConfig config = ClientConfig.defaultConfig().connectionTimeout(Duration.ofMinutes(20))
+                .readTimeout(Duration.ofMinutes(20)); // I change this 3 minute(Default) to 20 minutes.
+        DesiredCapabilities caps = new DesiredCapabilities("chrome", "", Platform.ANY);
+
+        driver = RemoteWebDriver.builder().oneOf(caps).address("http://localhost:4444").config(config).build(); // now you can use this remoteWebDriver.
+
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)).pageLoadTimeout(Duration.ofSeconds(10));
         driver.get("https://dou.ua/");
-
-
     }
 
 
