@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Reporter;
 import org.testng.annotations.*;
 import java.time.Duration;
@@ -17,7 +18,10 @@ public class DouTest {
 
     @BeforeMethod
     public void setUp() {
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "./src/test/java/chromedriver");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)).pageLoadTimeout(Duration.ofSeconds(10));
         driver.get("https://dou.ua/");
 
