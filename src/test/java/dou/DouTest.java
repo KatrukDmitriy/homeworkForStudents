@@ -18,7 +18,7 @@ public class DouTest {
 
     @BeforeMethod
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/test/java/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
