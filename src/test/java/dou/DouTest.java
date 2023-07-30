@@ -26,7 +26,7 @@ public class DouTest {
                 .readTimeout(Duration.ofMinutes(20)); // I change this 3 minute(Default) to 20 minutes.
         DesiredCapabilities caps = new DesiredCapabilities("chrome", "", Platform.ANY);
 
-        driver = RemoteWebDriver.builder().oneOf(caps).address("http://localhost:4443/").config(config).build(); // now you can use this remoteWebDriver.
+        driver = RemoteWebDriver.builder().oneOf(caps).address("http://localhost:4444/wd/hub").config(config).build(); // now you can use this remoteWebDriver.
 
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)).pageLoadTimeout(Duration.ofSeconds(10));
