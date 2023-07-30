@@ -5,11 +5,15 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Reporter;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
 import java.time.Duration;
-import static org.testng.Assert.*;
+
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class DouTest {
@@ -18,10 +22,7 @@ public class DouTest {
 
     @BeforeMethod
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)).pageLoadTimeout(Duration.ofSeconds(10));
         driver.get("https://dou.ua/");
 
@@ -29,31 +30,16 @@ public class DouTest {
     }
 
 
-    @DataProvider (name = "test-data")
-    public Object[][] dataProvFunc(){
+    @DataProvider(name = "test-data")
+    public Object[][] dataProvFunc() {
         return new Object[][]{
-                {"EPAM"},{"Luxoft"}
+                {"EPAM"}, {"Luxoft"}
         };
     }
 
-    @Test (groups="Positive_Test")
-    public  void searchInputAvailabilityWithNewDriver() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        WebDriver newDriver = new ChromeDriver(options);
-        newDriver.get("https://dou.ua/");
 
-        WebElement input = newDriver.findElement(By.cssSelector("#txtGlobalSearch"));
-
-        assertTrue(input.isEnabled(), "Input is disabled");
-
-    }
-
-
-
-    @Test (groups="Positive_Test")
-    public  void searchInputAvailability() {
+    @Test(groups = "Positive_Test")
+    public void searchInputAvailability() {
 
         WebElement input = driver.findElement(By.cssSelector("#txtGlobalSearch"));
 
@@ -62,8 +48,8 @@ public class DouTest {
     }
 
 
-    @Test (groups="Positive_Test", dataProvider = "test-data")
-    public  void searchResultsAvailability (String keyWord) {
+    @Test(groups = "Positive_Test", dataProvider = "test-data")
+    public void searchResultsAvailability(String keyWord) {
         WebElement input = driver.findElement(By.cssSelector("#txtGlobalSearch"));
         input.sendKeys(keyWord);
         Reporter.log("Keyword entered is : " + keyWord);
@@ -77,8 +63,8 @@ public class DouTest {
 
     }
 
-    @Test (groups="Positive_Test")
-    public  void searchWithValidKeyword() {
+    @Test(groups = "Positive_Test")
+    public void searchWithValidKeyword() {
 
         WebElement input = driver.findElement(By.cssSelector("#txtGlobalSearch"));
 
@@ -93,9 +79,8 @@ public class DouTest {
     }
 
 
-
-    @Test (groups="Negative_Test")
-    public  void searchWithInvalidKeyword () {
+    @Test(groups = "Negative_Test")
+    public void searchWithInvalidKeyword() {
         WebElement input = driver.findElement(By.cssSelector("#txtGlobalSearch"));
         input.sendKeys("vdfghj");
         input.sendKeys(Keys.ENTER);
@@ -108,9 +93,8 @@ public class DouTest {
     }
 
 
-
-    @Test (groups="Negative_Test")
-    public  void searchWithWrongKeyboardLayout () {
+    @Test(groups = "Negative_Test")
+    public void searchWithWrongKeyboardLayout() {
         WebElement input = driver.findElement(By.cssSelector("#txtGlobalSearch"));
 
         String searchQuery = "узфь";
@@ -127,8 +111,8 @@ public class DouTest {
 
     }
 
-    @Test (groups="Negative_Test")
-    public  void searchWithEmptyInput () {
+    @Test(groups = "Negative_Test")
+    public void searchWithEmptyInput() {
         WebElement input = driver.findElement(By.cssSelector("#txtGlobalSearch"));
         input.sendKeys(Keys.ENTER);
 
@@ -140,11 +124,10 @@ public class DouTest {
 
 
     @AfterMethod
-    public void driverQuit(){
+    public void driverQuit() {
         driver.quit();
 
     }
-
 
 
 }
