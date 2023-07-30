@@ -11,6 +11,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 import static org.testng.Assert.assertFalse;
@@ -22,11 +24,23 @@ public class DouTest {
 
     @BeforeMethod
     public void setUp() {
-        ClientConfig config = ClientConfig.defaultConfig().connectionTimeout(Duration.ofMinutes(20))
-                .readTimeout(Duration.ofMinutes(20)); // I change this 3 minute(Default) to 20 minutes.
-        DesiredCapabilities caps = new DesiredCapabilities("chrome", "", Platform.ANY);
+//        ClientConfig config = ClientConfig.defaultConfig().connectionTimeout(Duration.ofMinutes(20))
+//                .readTimeout(Duration.ofMinutes(20)); // I change this 3 minute(Default) to 20 minutes.
+//        DesiredCapabilities caps = new DesiredCapabilities("chrome", "", Platform.ANY);
 
-        driver = RemoteWebDriver.builder().oneOf(caps).address("http://localhost:5555/wd/hub").config(config).build(); // now you can use this remoteWebDriver.
+        System.setProperty("otel.traces.exporter", "jaeger");
+        System.setProperty("otel.exporter.jaeger.endpoint", "http://localhost:14250");
+        System.setProperty("otel.resource.attributes", "service.name=selenium-java-client");
+
+        ImmutableCapabilities capabilities = new ImmutableCapabilities("browserName", "chrome");
+
+        try {
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+//        driver = RemoteWebDriver.builder().oneOf(caps).address("http://localhost:5555/wd/hub").config(config).build(); // now you can use this remoteWebDriver.
 
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)).pageLoadTimeout(Duration.ofSeconds(10));
