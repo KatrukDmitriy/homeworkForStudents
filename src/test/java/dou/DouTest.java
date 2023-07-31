@@ -64,7 +64,7 @@ public class DouTest {
         capabilities.setCapability("enableVNC", true);
 
         try {
-            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+            driver = new RemoteWebDriver(new URL("http://172.21.0.2:4444/wd/hub"), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
