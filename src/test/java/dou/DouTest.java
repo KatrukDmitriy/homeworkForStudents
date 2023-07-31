@@ -65,7 +65,7 @@ public class DouTest {
         capabilities.setPlatform(Platform.ANY);
 
         try {
-            driver = new RemoteWebDriver(new URL("http://172.21.0.2:4444/wd/hub"), capabilities);
+            driver = new RemoteWebDriver(new URL("http://172.21.0.3:5555/wd/hub"), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
