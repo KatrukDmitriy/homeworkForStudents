@@ -3,6 +3,7 @@ package dou;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.http.ClientConfig;
 import org.testng.Reporter;
@@ -14,6 +15,7 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -32,17 +34,16 @@ public class DouTest {
         System.setProperty("otel.exporter.jaeger.endpoint", "http://localhost:14250");
         System.setProperty("otel.resource.attributes", "service.name=selenium-java-client");
 
-        ImmutableCapabilities capabilities = new ImmutableCapabilities("browserName", "chrome");
+//        ImmutableCapabilities capabilities = new ImmutableCapabilities("browserName", "chrome");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("chrome");
+        capabilities.setCapability("enableVNC", true);
 
         try {
             driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
-//        driver = RemoteWebDriver.builder().oneOf(caps).address("http://localhost:5555/wd/hub").config(config).build(); // now you can use this remoteWebDriver.
-
-        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)).pageLoadTimeout(Duration.ofSeconds(10));
         driver.get("https://dou.ua/");
     }
