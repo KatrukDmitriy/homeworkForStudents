@@ -1,0 +1,7 @@
+<suite name="All Tests Suite">
+    <test name="All Tests">
+        <classes>
+            <class name="dou.DouTest" />
+        </classes>
+    </test>
+</suite>
