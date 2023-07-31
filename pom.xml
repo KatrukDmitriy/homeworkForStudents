@@ -40,11 +40,11 @@
             <version>2.23.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-exporter-jaeger</artifactId>
-            <version>0.10.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.opentelemetry</groupId>-->
+<!--            <artifactId>opentelemetry-exporter-jaeger</artifactId>-->
+<!--            <version>0.10.0</version>-->
+<!--        </dependency>-->
 
 
         <dependency>
