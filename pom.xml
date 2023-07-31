@@ -12,6 +12,7 @@
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
         <isRemoteDriver>false</isRemoteDriver>
+        <aspectj.version>1.9.5</aspectj.version>
     </properties>
     <dependencies>
         <dependency>
@@ -39,17 +40,18 @@
             <version>2.23.0</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.opentelemetry</groupId>-->
-<!--            <artifactId>opentelemetry-exporter-jaeger</artifactId>-->
-<!--            <version>1.0.0</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-jaeger</artifactId>
+            <version>0.10.0</version>
+        </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.grpc</groupId>-->
-<!--            <artifactId>grpc-netty</artifactId>-->
-<!--            <version>1.35.0</version>-->
-<!--        </dependency>-->
+
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty</artifactId>
+            <version>1.35.0</version>
+        </dependency>
 
 
 
@@ -75,12 +77,24 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
+
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+
                     <suiteXmlFiles>
                         <suiteXmlFile>testngPositive.xml</suiteXmlFile>
                         <suiteXmlFile>testngNegative.xml</suiteXmlFile>
                         <suiteXmlFile>testngAll.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
