@@ -62,6 +62,7 @@ public class DouTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
         capabilities.setCapability("enableVNC", true);
+        capabilities.setPlatform(Platform.ANY);
 
         try {
             driver = new RemoteWebDriver(new URL("http://172.21.0.2:4444/wd/hub"), capabilities);
