@@ -1,0 +1,12 @@
+<suite name="Negative Tests Suite">
+    <test name="Negative Tests">
+        <classes>
+            <class name="BasiaAlina.HW41.DouSearchTests" />
+        </classes>
+        <groups>
+            <run>
+                <include name="NegativeTest" />
+            </run>
+        </groups>
+    </test>
+</suite>
