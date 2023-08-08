@@ -56,7 +56,7 @@ public class sendMail {
         waiterTitle.until(ExpectedConditions.titleContains("Inbox"));
         WebElement newEmailButton = driver.findElement(By.cssSelector(".button-large"));
         newEmailButton.click();
-        WebElement inputTo = driver.findElement(By.cssSelector("body > div.app-root > div:nth-child(5) > div > div > div > div > div > div.flex.flex-column.flex-nowrap.flex-align-items-start.mt-0 > div > div"));
+        WebElement inputTo = driver.findElement(By.cssSelector(".composer-editor-collapsed"));
         Actions enterAddress = new Actions(driver);
         enterAddress.sendKeys(inputTo, "jetyyya@proton.me").perform();
         WebElement inputSubject = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div/div/div/div/div/div[3]/div/div/input"));

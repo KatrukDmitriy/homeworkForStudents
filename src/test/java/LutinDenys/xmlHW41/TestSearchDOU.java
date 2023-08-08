@@ -103,7 +103,7 @@ public class TestSearchDOU {
             Assert.fail("Попередження про ввод у пошук лише пробілов не з'являється");
         }
     }
-    @AfterClass()
+    @AfterMethod()
     public void tearDown() {
         if (driver != null) {
             driver.close();
