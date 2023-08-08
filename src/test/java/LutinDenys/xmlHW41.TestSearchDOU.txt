@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: xmlHW41.TestSearchDOU
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 52.582 sec <<< FAILURE!
+negativeSearch2(xmlHW41.TestSearchDOU)  Time elapsed: 10.305 sec  <<< FAILURE!
+java.lang.AssertionError: Попередження про 'пустий' пошук не з'являється
+	at org.testng.Assert.fail(Assert.java:111)
+	at xmlHW41.TestSearchDOU.negativeSearch2(TestSearchDOU.java:84)
+
+negativeSearch3(xmlHW41.TestSearchDOU)  Time elapsed: 10.283 sec  <<< FAILURE!
+java.lang.AssertionError: Попередження про ввод у пошук лише пробілов не з'являється
+	at org.testng.Assert.fail(Assert.java:111)
+	at xmlHW41.TestSearchDOU.negativeSearch3(TestSearchDOU.java:104)
